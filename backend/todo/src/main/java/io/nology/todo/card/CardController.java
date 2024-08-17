@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,7 @@ public class CardController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Card> getCardById(@PathVariable Long id) throws NotFoundException {
-        Optional<Card> result = this.cardService.getCardbyId(id);
+        Optional<Card> result = this.cardService.getCardById(id);
         Card foundCard = result.orElseThrow(() -> new NotFoundException("Card not found"));
         return new ResponseEntity<Card>(foundCard, HttpStatus.OK);
     }
@@ -52,5 +53,12 @@ public class CardController {
         Optional<Card> result = this.cardService.updateCardById(id, cardData);
         Card foundCard = result.orElseThrow(() -> new NotFoundException("Could not find card with id " + id));
         return new ResponseEntity<Card>(foundCard, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Card> deleteCardById(@PathVariable Long id) throws NotFoundException {
+        Optional<Card> result = this.cardService.deleteCardById(id);
+        Card deletedCard = result.orElseThrow(() -> new NotFoundException("Could not find card with id " + id));
+        return new ResponseEntity<Card>(deletedCard, HttpStatus.OK);
     }
 }

@@ -47,14 +47,14 @@ public class CardService {
         return this.repo.findAll();
     }
 
-    public Optional<Card> getCardbyId(Long id) {
+    public Optional<Card> getCardById(Long id) {
         return this.repo.findById(id);
     }
 
     public Optional<Card> updateCardById(Long id, @Valid UpdateCardDTO cardData) throws Exception {
         ValidationErrors errors = new ValidationErrors();
 
-        Optional<Card> card = this.getCardbyId(id);
+        Optional<Card> card = this.getCardById(id);
         if (card.isEmpty()) {
             return card;
         }
@@ -89,6 +89,16 @@ public class CardService {
         foundCard.onUpdate();
         Card updatedCard = this.repo.save(foundCard);
         return Optional.of(updatedCard);
+    }
+
+    public Optional<Card> deleteCardById(Long id) {
+        Optional<Card> card = this.getCardById(id);
+        if (card.isEmpty()) {
+            return card;
+        }
+
+        this.repo.deleteById(id);
+        return card;
     }
 
 }
