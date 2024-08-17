@@ -1,5 +1,6 @@
 package io.nology.todo.category;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ public class CategoryService {
 
     public Optional<Category> findById(Long categoryId) {
         return this.repo.findById(categoryId);
+    }
+
+    public List<Category> getAllCategories() {
+        return this.repo.findAll();
     }
 
     public Category createCategory(@Valid CreateCategoryDTO categoryData) throws ServiceValidationException {
@@ -38,4 +43,16 @@ public class CategoryService {
         return this.repo.save(newCategory);
     }
 
+    public Optional<Category> deleteById(Long id) {
+        Optional<Category> category = this.findById(id);
+        if (category.isEmpty()) {
+            return category;
+        }
+
+        // Have to initialise otherwise I hit a lazy loading error when attempting to
+        // return the category
+        category.get().getCards().size();
+        this.repo.deleteById(id);
+        return category;
+    }
 }
