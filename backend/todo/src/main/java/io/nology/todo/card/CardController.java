@@ -69,5 +69,4 @@ public class CardController {
         Card deletedCard = result.orElseThrow(() -> new NotFoundException("Could not find card with id " + id));
         return new ResponseEntity<Card>(deletedCard, HttpStatus.OK);
     }
-
 }
