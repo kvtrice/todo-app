@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("cards")
@@ -35,8 +36,15 @@ public class CardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Card>> getAllCardResponseEntity() {
-        List<Card> cards = this.cardService.getAllCards();
+    public ResponseEntity<List<Card>> getAllCards(@RequestParam(value = "category", required = false) String category) {
+        List<Card> cards;
+
+        if (category != null && !category.isEmpty()) {
+            cards = this.cardService.getCardsByCategory(category);
+        } else {
+            cards = this.cardService.getAllCards();
+        }
+
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
@@ -61,4 +69,5 @@ public class CardController {
         Card deletedCard = result.orElseThrow(() -> new NotFoundException("Could not find card with id " + id));
         return new ResponseEntity<Card>(deletedCard, HttpStatus.OK);
     }
+
 }

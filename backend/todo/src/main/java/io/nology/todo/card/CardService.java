@@ -47,6 +47,10 @@ public class CardService {
         return this.repo.findAll();
     }
 
+    public List<Card> getCardsByCategory(String category) {
+        return this.repo.findByCategoryName(category);
+    }
+
     public Optional<Card> getCardById(Long id) {
         return this.repo.findById(id);
     }
@@ -100,5 +104,4 @@ public class CardService {
         this.repo.deleteById(id);
         return card;
     }
-
 }
