@@ -51,4 +51,44 @@ public class CardService {
         return this.repo.findById(id);
     }
 
+    public Optional<Card> updateCardById(Long id, @Valid UpdateCardDTO cardData) throws Exception {
+        ValidationErrors errors = new ValidationErrors();
+
+        Optional<Card> card = this.getCardbyId(id);
+        if (card.isEmpty()) {
+            return card;
+        }
+
+        Card foundCard = card.get();
+
+        if (cardData.getDescription() != null) {
+            foundCard.setDescription(cardData.getDescription().trim());
+        }
+
+        if (cardData.getStatus() != null) {
+            foundCard.setStatus(cardData.getStatus());
+        }
+
+        if (cardData.getCategoryId() != null) {
+            Optional<Category> category = this.categoryService.findById(cardData.getCategoryId());
+            if (category.isEmpty()) {
+                errors.addError("category", "Category with id " + cardData.getCategoryId() + " does not exist");
+            } else {
+                foundCard.setCategory(category.get());
+            }
+        }
+
+        if (cardData.isArchived()) {
+            foundCard.setArchived(cardData.isArchived());
+        }
+
+        if (errors.hasErrors()) {
+            throw new ServiceValidationException(errors);
+        }
+
+        foundCard.onUpdate();
+        Card updatedCard = this.repo.save(foundCard);
+        return Optional.of(updatedCard);
+    }
+
 }
