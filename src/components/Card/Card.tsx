@@ -1,6 +1,16 @@
-const Card = () => {
-  return (
-    <div>Card</div>
-  )
+import { CardFetchResponse } from "../../types/card";
+
+interface CardProps {
+	card: CardFetchResponse;
 }
-export default Card
+
+const Card = ({ card }: CardProps) => {
+	return (
+		<div>
+			<h5>{card.description}</h5>
+			<p>Category: {card.category.name}</p>
+		</div>
+	);
+};
+
+export default Card;

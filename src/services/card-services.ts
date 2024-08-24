@@ -1,16 +1,7 @@
 import { CardFormData } from "../components/CardForm/schema";
+import { CardFetchResponse, CardResponse } from "../types/card";
 
 const baseUrl = import.meta.env.VITE_APP_API_BASE_URL;
-
-export interface CardResponse {
-	id: number;
-	description: string;
-	status: string;
-	categoryId: number;
-	createdAt: string;
-	updatedAt: string;
-	isArchived: boolean;
-}
 
 export const createCard = async (cardData: CardFormData) => {
 	const response = await fetch(`${baseUrl}/cards`, {
@@ -40,7 +31,7 @@ export const getAllCards = async () => {
 	}
 
 	const cards = await response.json();
-	return cards as CardResponse[];
+	return cards as CardFetchResponse[];
 };
 
 export const getCardsByCategory = async (category: string) => {
@@ -51,7 +42,7 @@ export const getCardsByCategory = async (category: string) => {
 	}
 
 	const cards = await response.json();
-	return cards as CardResponse[];
+	return cards as CardFetchResponse[];
 };
 
 export const getCardById = async (id: number) => {
@@ -62,7 +53,7 @@ export const getCardById = async (id: number) => {
 	}
 
 	const card = await response.json();
-	return card as CardResponse;
+	return card as CardFetchResponse;
 };
 
 export const updateCardById = async (cardData: CardFormData, id: number) => {
