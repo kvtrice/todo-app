@@ -23,6 +23,9 @@ const StatusList = ({ title, status }: StatusListProps) => {
 	const { cards } = cardContext;
 
 	const filteredCardsByStatus = cards.filter(card => card.status === status);
+	const filteredCardsByArchived = filteredCardsByStatus.filter(
+		card => card.archived === false
+	);
 
 	const onSubmit = async (data: CardFormData) => {
 		await createCard(data)
@@ -35,7 +38,7 @@ const StatusList = ({ title, status }: StatusListProps) => {
 			<div className={styles.statusList}>
 				<h1>{title}</h1>
 				{cards &&
-					filteredCardsByStatus.map(card => (
+					filteredCardsByArchived.map(card => (
 						<Card
 							key={card.id}
 							card={card}

@@ -10,6 +10,7 @@ interface CardFormProps {
 	onSubmit: (data: CardFormData) => unknown;
 	defaultValues?: Partial<CardFormData>;
 	formType?: FormType;
+	handleArchive?: () => unknown;
 }
 
 type FormType = "CREATE" | "EDIT";
@@ -23,6 +24,7 @@ const CardForm = ({
 		isArchived: false,
 	},
 	formType = "CREATE",
+	handleArchive,
 }: CardFormProps) => {
 	const {
 		register,
@@ -97,6 +99,14 @@ const CardForm = ({
 				</select>
 				{errors?.status && <small>{errors.status.message}</small>}
 			</div>
+			{formType === "EDIT" && handleArchive && (
+				<button
+					type="button"
+					onClick={() => handleArchive()}
+				>
+					Archive Card
+				</button>
+			)}
 			<button type="submit">
 				{formType === "CREATE" ? "Create" : "Update"} Card
 			</button>
