@@ -6,7 +6,7 @@ export interface CardResponse {
 	id: number;
 	description: string;
 	status: string;
-	category: object;
+	categoryId: number;
 	createdAt: string;
 	updatedAt: string;
 	isArchived: boolean;
@@ -15,7 +15,11 @@ export interface CardResponse {
 export const createCard = async (cardData: CardFormData) => {
 	const response = await fetch(`${baseUrl}/cards`, {
 		method: "POST",
-		body: JSON.stringify(cardData),
+		body: JSON.stringify({
+			...cardData,
+			status: cardData.status.toString(),
+			categoryId: Number(cardData.categoryId),
+		}),
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -25,8 +29,7 @@ export const createCard = async (cardData: CardFormData) => {
 		throw new Error("Unable to create card");
 	}
 
-	const card = await response.json();
-	return card as CardResponse;
+	return (await response.json()) as CardResponse;
 };
 
 export const getAllCards = async () => {

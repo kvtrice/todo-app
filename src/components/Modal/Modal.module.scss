@@ -40,20 +40,4 @@
 		justify-content: center;
 		align-items: center;
 	}
-
-	&__footer {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		&__btn {
-			border: none;
-			font-size: 16px;
-			border-radius: 50px;
-			font-size: 1rem;
-			padding: 0.5rem 1rem;
-			cursor: pointer;
-			transition: 200ms;
-		}
-	}
 }

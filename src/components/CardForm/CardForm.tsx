@@ -1,13 +1,13 @@
 import styles from "./CardForm.module.scss";
 import { useForm } from "react-hook-form";
-import { CardFormData, schema } from "./schema";
+import { CardFormData, schema, Status } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { CategoryContext } from "../../contexts/CategoryContextProvider";
 import { STATUS_OPTIONS } from "../../constants/data";
 
 interface CardFormProps {
-	onSubmit: (data: CardFormData) => void;
+	onSubmit: (data: CardFormData) => unknown;
 	defaultValues?: Partial<CardFormData>;
 	formType?: FormType;
 }
@@ -18,8 +18,8 @@ const CardForm = ({
 	onSubmit,
 	defaultValues = {
 		description: "",
-		status: "",
-		category: "",
+		status: Status.TODO,
+		categoryId: 1,
 		isArchived: false,
 	},
 	formType = "CREATE",
@@ -34,6 +34,8 @@ const CardForm = ({
 		defaultValues,
 	});
 
+	isSubmitSuccessful && reset();
+
 	const categoryContext = useContext(CategoryContext);
 
 	if (!categoryContext) {
@@ -42,66 +44,63 @@ const CardForm = ({
 
 	const { categories } = categoryContext;
 
-	isSubmitSuccessful && reset();
-
 	return (
-		<>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className={styles.form}
-			>
-				<div className={styles.form__field}>
-					<label htmlFor="description">Task Description: </label>
-					<textarea
-						id="description"
-						{...register("description")}
-					></textarea>
-					{errors?.description && (
-						<small>{errors.description.message}</small>
-					)}
-				</div>
-				<div className={styles.form__field}>
-					<label htmlFor="category">Category: </label>
-					<select
-						id="category"
-						{...register("category")}
-					>
-						{categories &&
-							categories.map(category => (
-								<option
-									key={category.id}
-									value={category.name}
-								>
-									{category.name}
-								</option>
-							))}
-					</select>
-					{errors?.category && (
-						<small>{errors.category.message}</small>
-					)}
-				</div>
-				<div className={styles.form__field}>
-					<label htmlFor="status">Status: </label>
-					<select
-						id="status"
-						{...register("status")}
-					>
-						{STATUS_OPTIONS.map(status => (
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className={styles.form}
+		>
+			<div className={styles.form__field}>
+				<label htmlFor="description">Task Description: </label>
+				<input
+					type="text"
+					id="description"
+					{...register("description")}
+				/>
+				{errors?.description && (
+					<small>{errors.description.message}</small>
+				)}
+			</div>
+			<div className={styles.form__field}>
+				<label htmlFor="category">Category: </label>
+				<select
+					id="category"
+					{...register("categoryId", { valueAsNumber: true })}
+				>
+					{categories &&
+						categories.map(category => (
 							<option
-								key={status.value}
-								value={status.value}
+								key={category.id}
+								value={category.id}
 							>
-								{status.label}
+								{category.name}
 							</option>
 						))}
-					</select>
-					{errors?.status && <small>{errors.status.message}</small>}
-				</div>
-				<button>
-					{formType === "CREATE" ? "Create" : "Update"} Card
-				</button>
-			</form>
-		</>
+				</select>
+				{errors?.categoryId && (
+					<small>{errors.categoryId.message}</small>
+				)}
+			</div>
+			<div className={styles.form__field}>
+				<label htmlFor="status">Status: </label>
+				<select
+					id="status"
+					{...register("status")}
+				>
+					{STATUS_OPTIONS.map(status => (
+						<option
+							key={status.value}
+							value={status.value}
+						>
+							{status.label}
+						</option>
+					))}
+				</select>
+				{errors?.status && <small>{errors.status.message}</small>}
+			</div>
+			<button type="submit">
+				{formType === "CREATE" ? "Create" : "Update"} Card
+			</button>
+		</form>
 	);
 };
 

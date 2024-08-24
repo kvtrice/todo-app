@@ -1,5 +1,7 @@
+import { Status } from "../components/CardForm/schema";
+
 export const STATUS_OPTIONS = [
-	{ value: "TODO", label: "To Do" },
-	{ value: "INPROGRESS", label: "In Progress" },
-	{ value: "DONE", label: "Done" },
+	{ value: Status.TODO, label: "To Do" },
+	{ value: Status.INPROGRESS, label: "In Progress" },
+	{ value: Status.DONE, label: "Done" },
 ];

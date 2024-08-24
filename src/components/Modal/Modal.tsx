@@ -6,9 +6,7 @@ interface ModalProps {
 }
 
 const Modal = ({ children, handleModal }: ModalProps) => {
-	const closeModal = () => {
-		handleModal(false);
-	};
+	const closeModal = () => handleModal(false);
 
 	return (
 		<div>
@@ -23,15 +21,6 @@ const Modal = ({ children, handleModal }: ModalProps) => {
 						</p>
 					</div>
 					<div className={styles.modal__content}>{children}</div>
-					<div className={styles.modal__footer}>
-						<button
-							className={styles.modal__footer__btn}
-							onClick={closeModal}
-						>
-							Cancel
-						</button>
-						<button>Save</button>
-					</div>
 				</div>
 			</div>
 		</div>
