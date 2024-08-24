@@ -101,7 +101,12 @@ public class CardService {
             return card;
         }
 
-        this.repo.deleteById(id);
-        return card;
+        Card foundCard = card.get();
+        foundCard.setArchived(true);
+
+        foundCard.onUpdate();
+
+        Card updatedCard = this.repo.save(foundCard);
+        return Optional.of(updatedCard);
     }
 }
