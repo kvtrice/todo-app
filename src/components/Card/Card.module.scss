@@ -1,0 +1,42 @@
+.card {
+	display: grid;
+	grid-template-columns: 9fr 1fr;
+	padding: 0.5rem 0.8rem;
+	border-radius: 10px;
+	box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.351);
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+
+		&__category {
+			width: fit-content;
+
+			&__content {
+				padding: 0.1rem 0.5rem;
+				border-radius: 50px;
+				background-color: lightgrey;
+			}
+		}
+	}
+
+	&__editButton {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		&__icon {
+			transition: 200ms;
+			border-radius: 50px;
+			padding: 0.3rem;
+
+			&:hover {
+				background-color: lightgray;
+				transform: scale(1.2);
+			}
+		}
+	}
+}

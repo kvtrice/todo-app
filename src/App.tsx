@@ -1,23 +1,20 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
 import ToDoMain from "./components/ToDoMain/ToDoMain";
 import CardContextProvider from "./contexts/CardContextProvider";
 import CategoryContextProvider from "./contexts/CategoryContextProvider";
 import CardFilterContextProvider from "./contexts/CardFilterContextProvider";
+import Layout from "./components/Layout/Layout";
 
 function App() {
 	return (
-		<>
-			<Header />
-			<CategoryContextProvider>
-				<CardContextProvider>
-					<CardFilterContextProvider>
+		<CategoryContextProvider>
+			<CardContextProvider>
+				<CardFilterContextProvider>
+					<Layout>
 						<ToDoMain />
-					</CardFilterContextProvider>
-				</CardContextProvider>
-			</CategoryContextProvider>
-			<Footer />
-		</>
+					</Layout>
+				</CardFilterContextProvider>
+			</CardContextProvider>
+		</CategoryContextProvider>
 	);
 }
 

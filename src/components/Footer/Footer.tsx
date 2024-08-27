@@ -1,7 +1,11 @@
+import styles from "./Footer.module.scss";
+
 const Footer = () => {
 	return (
-		<div>
-			<p>Made with ❤️ by Kat</p>
+		<div className={styles.footer}>
+			<p className={styles.footer__content}>
+				Made with ❤️ by <a href="https://github.com/kvtrice">Kat</a>
+			</p>
 		</div>
 	);
 };

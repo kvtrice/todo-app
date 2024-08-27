@@ -49,27 +49,32 @@ const StatusList = ({ title, status }: StatusListProps) => {
 	return (
 		<>
 			<div className={styles.statusList}>
-				<h1>{title}</h1>
-				{cards &&
-					filteredCards.map(card => (
-						<Card
-							key={card.id}
-							card={card}
-						/>
-					))}
-				<button onClick={() => setAddNewCardModal(true)}>
+				<h2 className={styles.statusList__heading}>{title}</h2>
+				<div className={styles.cardContainer}>
+					{cards &&
+						filteredCards.map(card => (
+							<Card
+								key={card.id}
+								card={card}
+							/>
+						))}
+				</div>
+				<button
+					className={styles.statusList__newCardButton}
+					onClick={() => setAddNewCardModal(true)}
+				>
 					Add New Card
 				</button>
-			</div>
 
-			{showAddNewCardModal && (
-				<Modal handleModal={setAddNewCardModal}>
-					<CardForm
-						onSubmit={onSubmit}
-						defaultValues={{ status: status }}
-					/>
-				</Modal>
-			)}
+				{showAddNewCardModal && (
+					<Modal handleModal={setAddNewCardModal}>
+						<CardForm
+							onSubmit={onSubmit}
+							defaultValues={{ status: status }}
+						/>
+					</Modal>
+				)}
+			</div>
 		</>
 	);
 };

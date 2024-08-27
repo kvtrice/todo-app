@@ -4,7 +4,7 @@ import styles from "./StatusLists.module.scss";
 
 const StatusLists = () => {
 	return (
-		<div className={styles.statusListsWrapper}>
+		<div className={styles.statusLists}>
 			{STATUS_OPTIONS.map(status => (
 				<StatusList
 					key={status.value}
