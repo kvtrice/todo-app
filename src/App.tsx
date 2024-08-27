@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import ToDoMain from "./components/ToDoMain/ToDoMain";
 import CardContextProvider from "./contexts/CardContextProvider";
 import CategoryContextProvider from "./contexts/CategoryContextProvider";
+import CardFilterContextProvider from "./contexts/CardFilterContextProvider";
 
 function App() {
 	return (
@@ -10,7 +11,9 @@ function App() {
 			<Header />
 			<CategoryContextProvider>
 				<CardContextProvider>
-					<ToDoMain />
+					<CardFilterContextProvider>
+						<ToDoMain />
+					</CardFilterContextProvider>
 				</CardContextProvider>
 			</CategoryContextProvider>
 			<Footer />

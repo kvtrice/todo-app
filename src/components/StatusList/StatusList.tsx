@@ -6,6 +6,7 @@ import { CardFormData, Status } from "../CardForm/schema";
 import { createCard } from "../../services/card-services";
 import { CardContext } from "../../contexts/CardContextProvider";
 import Card from "../Card/Card";
+import { CardFilterContext } from "../../contexts/CardFilterContextProvider";
 
 interface StatusListProps {
 	title: string;
@@ -15,17 +16,29 @@ interface StatusListProps {
 const StatusList = ({ title, status }: StatusListProps) => {
 	const [showAddNewCardModal, setAddNewCardModal] = useState<boolean>(false);
 	const cardContext = useContext(CardContext);
+	const cardFilterContext = useContext(CardFilterContext);
 
 	if (!cardContext) {
 		throw new Error("Unable to find card context");
 	}
+	if (!cardFilterContext) {
+		throw new Error("Unable to find category filter context");
+	}
 
 	const { cards } = cardContext;
+	const { categoryFilter, showArchived } = cardFilterContext;
 
-	const filteredCardsByStatus = cards.filter(card => card.status === status);
-	const filteredCardsByArchived = filteredCardsByStatus.filter(
-		card => card.archived === false
-	);
+	let filteredCards = cards.filter(card => card.status === status);
+
+	if (!showArchived) {
+		filteredCards = filteredCards.filter(card => card.archived === false);
+	}
+
+	if (categoryFilter !== "all" && categoryFilter !== "") {
+		filteredCards = filteredCards.filter(
+			card => card.category.name === categoryFilter
+		);
+	}
 
 	const onSubmit = async (data: CardFormData) => {
 		await createCard(data)
@@ -38,7 +51,7 @@ const StatusList = ({ title, status }: StatusListProps) => {
 			<div className={styles.statusList}>
 				<h1>{title}</h1>
 				{cards &&
-					filteredCardsByArchived.map(card => (
+					filteredCards.map(card => (
 						<Card
 							key={card.id}
 							card={card}
