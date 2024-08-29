@@ -3,10 +3,15 @@ import { CardFetchResponse } from "../../types/card";
 import Modal from "../Modal/Modal";
 import CardForm from "../CardForm/CardForm";
 import { toStatusEnum } from "../../utils/status-utils";
-import { deleteCardById, updateCardById } from "../../services/card-services";
+import {
+	deleteCardById,
+	getAllCards,
+	updateCardById,
+} from "../../services/card-services";
 import { CardFormData } from "../CardForm/schema";
 import styles from "./Card.module.scss";
 import { MdOutlineEdit } from "react-icons/md";
+import useCardContext from "../../hooks/useCardContext";
 
 interface CardProps {
 	card: CardFetchResponse;
@@ -14,17 +19,28 @@ interface CardProps {
 
 const Card = ({ card }: CardProps) => {
 	const [showEditCardModal, setShowEditCardModal] = useState(false);
+	const { setCards } = useCardContext();
 
 	const onSubmit = async (data: CardFormData) => {
-		await updateCardById(data, card.id)
-			.then(() => setShowEditCardModal(false))
-			.catch(e => console.error(e.message));
+		try {
+			await updateCardById(data, card.id);
+			const updatedCards = await getAllCards();
+			setCards(updatedCards);
+			setShowEditCardModal(false);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const handleArchive = async () => {
-		await deleteCardById(card.id)
-			.then(() => setShowEditCardModal(false))
-			.catch(e => console.error(e));
+		try {
+			await deleteCardById(card.id);
+			const updatedCards = await getAllCards();
+			setCards(updatedCards);
+			setShowEditCardModal(false);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (

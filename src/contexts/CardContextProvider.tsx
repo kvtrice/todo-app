@@ -20,7 +20,7 @@ const CardContextProvider = ({ children }: CardContextProviderProps) => {
 
 	useEffect(() => {
 		getAllCards().then(cards => setCards(cards));
-	}, [cards]);
+	}, []);
 
 	return (
 		<CardContext.Provider value={{ cards, setCards }}>
@@ -28,4 +28,5 @@ const CardContextProvider = ({ children }: CardContextProviderProps) => {
 		</CardContext.Provider>
 	);
 };
+
 export default CardContextProvider;

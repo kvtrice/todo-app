@@ -1,27 +1,16 @@
-import { useContext, useState } from "react";
-import { CategoryContext } from "../../contexts/CategoryContextProvider";
-import { CardFilterContext } from "../../contexts/CardFilterContextProvider";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import CategoryForm from "../CategoryForm/CategoryForm";
 import styles from "./FilterBar.module.scss";
+import useCategoryContext from "../../hooks/useCategoryContext";
+import useCardFilterContext from "../../hooks/useCardFilterContext";
 
 const FilterBar = () => {
 	const [showManageCategoriesModal, setShowManageCategoriesModal] =
 		useState(false);
-	const categoryContext = useContext(CategoryContext);
-	const cardFilterContext = useContext(CardFilterContext);
-
-	if (!categoryContext) {
-		throw new Error("Unable to find category context");
-	}
-
-	if (!cardFilterContext) {
-		throw new Error("Unable to find category filter context");
-	}
-
-	const { categories } = categoryContext;
+	const { categories } = useCategoryContext();
 	const { setCategoryFilter, setShowArchived, showArchived } =
-		cardFilterContext;
+		useCardFilterContext();
 
 	const allCategories = [{ name: "all" }, ...categories];
 
@@ -62,6 +51,7 @@ const FilterBar = () => {
 					</button>
 				</div>
 			</div>
+			
 			{showManageCategoriesModal && (
 				<Modal handleModal={setShowManageCategoriesModal}>
 					<CategoryForm />

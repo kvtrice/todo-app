@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styles from "./StatusList.module.scss";
 import Modal from "../Modal/Modal";
 import CardForm from "../CardForm/CardForm";
 import { CardFormData, Status } from "../CardForm/schema";
-import { createCard } from "../../services/card-services";
-import { CardContext } from "../../contexts/CardContextProvider";
+import { createCard, getAllCards } from "../../services/card-services";
 import Card from "../Card/Card";
-import { CardFilterContext } from "../../contexts/CardFilterContextProvider";
+import useCardContext from "../../hooks/useCardContext";
+import useCardFilterContext from "../../hooks/useCardFilterContext";
 
 interface StatusListProps {
 	title: string;
@@ -15,18 +15,8 @@ interface StatusListProps {
 
 const StatusList = ({ title, status }: StatusListProps) => {
 	const [showAddNewCardModal, setAddNewCardModal] = useState<boolean>(false);
-	const cardContext = useContext(CardContext);
-	const cardFilterContext = useContext(CardFilterContext);
-
-	if (!cardContext) {
-		throw new Error("Unable to find card context");
-	}
-	if (!cardFilterContext) {
-		throw new Error("Unable to find category filter context");
-	}
-
-	const { cards } = cardContext;
-	const { categoryFilter, showArchived } = cardFilterContext;
+	const { cards, setCards } = useCardContext();
+	const { categoryFilter, showArchived } = useCardFilterContext();
 
 	let filteredCards = cards.filter(card => card.status === status);
 
@@ -41,9 +31,14 @@ const StatusList = ({ title, status }: StatusListProps) => {
 	}
 
 	const onSubmit = async (data: CardFormData) => {
-		await createCard(data)
-			.then(() => setAddNewCardModal(false))
-			.catch(e => console.error(e.message));
+		try {
+			await createCard(data);
+			const updatedCards = await getAllCards();
+			setCards(updatedCards);
+			setAddNewCardModal(false);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
