@@ -66,6 +66,7 @@ const StatusList = ({ title, status }: StatusListProps) => {
 						<CardForm
 							onSubmit={onSubmit}
 							defaultValues={{ status: status }}
+							setModal={setAddNewCardModal}
 						/>
 					</Modal>
 				)}

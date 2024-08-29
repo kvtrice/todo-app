@@ -32,7 +32,7 @@ const Card = ({ card }: CardProps) => {
 		}
 	};
 
-	const handleArchive = async () => {
+	const onArchive = async () => {
 		try {
 			await deleteCardById(card.id);
 			const updatedCards = await getAllCards();
@@ -47,10 +47,15 @@ const Card = ({ card }: CardProps) => {
 		<>
 			<div className={styles.card}>
 				<div className={styles.card__main}>
-					<div className={styles.card__main__category}>
-						<p className={styles.card__main__category__content}>
+					<div className={styles.card__main__tags}>
+						<span className={styles.card__main__tags__category}>
 							{card.category.name}
-						</p>
+						</span>
+						{card.archived && (
+							<span className={styles.card__main__tags__archived}>
+								Archived
+							</span>
+						)}
 					</div>
 
 					<div className={styles.card__description}>
@@ -76,8 +81,9 @@ const Card = ({ card }: CardProps) => {
 							status: toStatusEnum(card.status),
 							isArchived: card.archived,
 						}}
+						setModal={setShowEditCardModal}
 						onSubmit={onSubmit}
-						handleArchive={handleArchive}
+						onArchive={onArchive}
 					/>
 				</Modal>
 			)}

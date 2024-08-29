@@ -51,10 +51,10 @@ const FilterBar = () => {
 					</button>
 				</div>
 			</div>
-			
+
 			{showManageCategoriesModal && (
 				<Modal handleModal={setShowManageCategoriesModal}>
-					<CategoryForm />
+					<CategoryForm setModal={setShowManageCategoriesModal} />
 				</Modal>
 			)}
 		</>

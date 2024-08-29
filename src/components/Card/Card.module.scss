@@ -10,13 +10,22 @@
 		flex-direction: column;
 		gap: 0.8rem;
 
-		&__category {
+		&__tags {
 			width: fit-content;
+			display: flex;
+			flex-direction: row;
+			gap: 0.5rem;
 
-			&__content {
+			&__category {
 				padding: 0.1rem 0.5rem;
 				border-radius: 50px;
 				background-color: lightgrey;
+			}
+
+			&__archived {
+				padding: 0.1rem 0.5rem;
+				border-radius: 50px;
+				background-color: lightcoral;
 			}
 		}
 	}

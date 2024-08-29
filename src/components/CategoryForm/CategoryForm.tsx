@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { CategoryContext } from "../../contexts/CategoryContextProvider";
 import { CategoryFormData, schema } from "./schema";
 import {
 	CategoryResponse,
@@ -8,8 +6,14 @@ import {
 } from "../../services/category-services";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useCategoryContext from "../../hooks/useCategoryContext";
+import styles from "./CategoryForm.module.scss";
 
-const CategoryForm = () => {
+interface CategoryFormProps {
+	setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CategoryForm = ({ setModal }: CategoryFormProps) => {
 	const {
 		register,
 		reset,
@@ -18,14 +22,9 @@ const CategoryForm = () => {
 	} = useForm<CategoryFormData>({
 		resolver: zodResolver(schema),
 	});
+	const { categories, setCategories } = useCategoryContext();
 
 	isSubmitSuccessful && reset();
-
-	const categoryContext = useContext(CategoryContext);
-	if (!categoryContext) {
-		throw new Error("Unable to find category context");
-	}
-	const { categories, setCategories } = categoryContext;
 
 	const handleDeleteCategory = async (category: CategoryResponse) => {
 		try {
@@ -61,16 +60,21 @@ const CategoryForm = () => {
 		}
 	};
 
-	console.log(categories);
-
 	return (
 		<div>
-			<div>
+			<div className={styles.category__list}>
+				<h2 className={styles.category__heading}>Categories</h2>
 				{categories &&
 					categories.map(category => (
-						<div key={category.id}>
-							<p>{category.name}</p>
+						<div
+							key={category.id}
+							className={styles.category}
+						>
+							<p className={styles.category__name}>
+								{category.name}
+							</p>
 							<button
+								className={styles.category__delete}
 								onClick={() => handleDeleteCategory(category)}
 							>
 								Delete
@@ -78,18 +82,29 @@ const CategoryForm = () => {
 						</div>
 					))}
 			</div>
-			<form onSubmit={handleSubmit(handleAddNewCategory)}>
-				<div>
-					<label htmlFor="name">Add new category: </label>
+			<form
+				className={styles.category__form}
+				onSubmit={handleSubmit(handleAddNewCategory)}
+			>
+				<div className={styles.category__form__input}>
 					<input
 						type="text"
 						id="name"
+						placeholder="Add a new category"
 						{...register("name")}
 					/>
 					{errors?.name && <small>{errors.name.message}</small>}
 				</div>
 				<button type="submit">Add</button>
 			</form>
+			<div className={styles.close}>
+				<button
+					className={styles.close__button}
+					onClick={() => setModal(false)}
+				>
+					Done
+				</button>
+			</div>
 		</div>
 	);
 };

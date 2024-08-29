@@ -2,15 +2,15 @@ import styles from "./CardForm.module.scss";
 import { useForm } from "react-hook-form";
 import { CardFormData, schema, Status } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
-import { CategoryContext } from "../../contexts/CategoryContextProvider";
 import { STATUS_OPTIONS } from "../../constants/data";
+import useCategoryContext from "../../hooks/useCategoryContext";
 
 interface CardFormProps {
 	onSubmit: (data: CardFormData) => unknown;
 	defaultValues?: Partial<CardFormData>;
 	formType?: FormType;
-	handleArchive?: () => unknown;
+	onArchive?: () => unknown;
+	setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type FormType = "CREATE" | "EDIT";
@@ -24,7 +24,8 @@ const CardForm = ({
 		isArchived: false,
 	},
 	formType = "CREATE",
-	handleArchive,
+	onArchive,
+	setModal,
 }: CardFormProps) => {
 	const {
 		register,
@@ -35,82 +36,82 @@ const CardForm = ({
 		resolver: zodResolver(schema),
 		defaultValues,
 	});
+	const { categories } = useCategoryContext();
 
 	isSubmitSuccessful && reset();
 
-	const categoryContext = useContext(CategoryContext);
-
-	if (!categoryContext) {
-		throw new Error("Unable to get Category Context");
-	}
-
-	const { categories } = categoryContext;
-
 	return (
-		<form
-			onSubmit={handleSubmit(onSubmit)}
-			className={styles.form}
-		>
-			<div className={styles.form__field}>
-				<label htmlFor="description">Task Description: </label>
-				<input
-					type="text"
-					id="description"
-					{...register("description")}
-				/>
-				{errors?.description && (
-					<small>{errors.description.message}</small>
-				)}
+		<>
+			<div>
+				<h2>{formType === "CREATE" ? "Add New" : "Edit "} Card</h2>
 			</div>
-			<div className={styles.form__field}>
-				<label htmlFor="category">Category: </label>
-				<select
-					id="category"
-					{...register("categoryId", { valueAsNumber: true })}
-				>
-					{categories &&
-						categories.map(category => (
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className={styles.form}
+			>
+				<div className={styles.form__field}>
+					<label htmlFor="description">Task Description: </label>
+					<input
+						type="text"
+						id="description"
+						{...register("description")}
+					/>
+					{errors?.description && (
+						<small>{errors.description.message}</small>
+					)}
+				</div>
+				<div className={styles.form__field}>
+					<label htmlFor="category">Category: </label>
+					<select
+						id="category"
+						{...register("categoryId", { valueAsNumber: true })}
+					>
+						{categories &&
+							categories.map(category => (
+								<option
+									key={category.id}
+									value={category.id}
+								>
+									{category.name}
+								</option>
+							))}
+					</select>
+					{errors?.categoryId && (
+						<small>{errors.categoryId.message}</small>
+					)}
+				</div>
+				<div className={styles.form__field}>
+					<label htmlFor="status">Status: </label>
+					<select
+						id="status"
+						{...register("status")}
+					>
+						{STATUS_OPTIONS.map(status => (
 							<option
-								key={category.id}
-								value={category.id}
+								key={status.value}
+								value={status.value}
 							>
-								{category.name}
+								{status.label}
 							</option>
 						))}
-				</select>
-				{errors?.categoryId && (
-					<small>{errors.categoryId.message}</small>
+					</select>
+					{errors?.status && <small>{errors.status.message}</small>}
+				</div>
+
+				{formType === "EDIT" && onArchive && (
+					<button
+						type="button"
+						onClick={() => onArchive()}
+					>
+						Archive Card
+					</button>
 				)}
-			</div>
-			<div className={styles.form__field}>
-				<label htmlFor="status">Status: </label>
-				<select
-					id="status"
-					{...register("status")}
-				>
-					{STATUS_OPTIONS.map(status => (
-						<option
-							key={status.value}
-							value={status.value}
-						>
-							{status.label}
-						</option>
-					))}
-				</select>
-				{errors?.status && <small>{errors.status.message}</small>}
-			</div>
-			{formType === "EDIT" && handleArchive && (
-				<button
-					type="button"
-					onClick={() => handleArchive()}
-				>
-					Archive Card
+				<button onClick={() => setModal(false)}>Cancel</button>
+				<button type="submit">
+					{formType === "CREATE" ? "Create" : "Update"} Card
 				</button>
-			)}
-			<button type="submit">
-				{formType === "CREATE" ? "Create" : "Update"} Card
-			</button>
-		</form>
+			</form>
+		</>
 	);
 };
 
