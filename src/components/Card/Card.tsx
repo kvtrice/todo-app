@@ -64,29 +64,28 @@ const Card = ({ card }: CardProps) => {
 				</div>
 				<div className={styles.card__editButton}>
 					<MdOutlineEdit
-						size={20}
+						size={22}
 						className={styles.card__editButton__icon}
 						onClick={() => setShowEditCardModal(true)}
 					/>
 				</div>
+				{showEditCardModal && (
+					<Modal handleModal={setShowEditCardModal}>
+						<CardForm
+							formType="EDIT"
+							defaultValues={{
+								description: card.description,
+								categoryId: card.category.id,
+								status: toStatusEnum(card.status),
+								isArchived: card.archived,
+							}}
+							setModal={setShowEditCardModal}
+							onSubmit={onSubmit}
+							onArchive={onArchive}
+						/>
+					</Modal>
+				)}
 			</div>
-
-			{showEditCardModal && (
-				<Modal handleModal={setShowEditCardModal}>
-					<CardForm
-						formType="EDIT"
-						defaultValues={{
-							description: card.description,
-							categoryId: card.category.id,
-							status: toStatusEnum(card.status),
-							isArchived: card.archived,
-						}}
-						setModal={setShowEditCardModal}
-						onSubmit={onSubmit}
-						onArchive={onArchive}
-					/>
-				</Modal>
-			)}
 		</>
 	);
 };

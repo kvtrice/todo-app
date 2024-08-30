@@ -19,7 +19,9 @@ const CardContextProvider = ({ children }: CardContextProviderProps) => {
 	const [cards, setCards] = useState<CardFetchResponse[]>([]);
 
 	useEffect(() => {
-		getAllCards().then(cards => setCards(cards));
+		getAllCards().then(cards => {
+			setCards(cards);
+		});
 	}, []);
 
 	return (

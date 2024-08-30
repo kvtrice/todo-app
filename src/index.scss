@@ -1,7 +1,11 @@
+@use "./styles/variables" as v;
+
 body {
 	margin: 0;
 	padding: 0;
-	background-color: lightcoral;
+	background-image: v.$primary-bg-gradient;
+	font-family: v.$primary-font-family;
+	font-size: v.$primary-font-size;
 }
 
 h1,

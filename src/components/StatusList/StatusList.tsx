@@ -7,6 +7,7 @@ import { createCard, getAllCards } from "../../services/card-services";
 import Card from "../Card/Card";
 import useCardContext from "../../hooks/useCardContext";
 import useCardFilterContext from "../../hooks/useCardFilterContext";
+import { FaPlus } from "react-icons/fa6";
 
 interface StatusListProps {
 	title: string;
@@ -24,7 +25,7 @@ const StatusList = ({ title, status }: StatusListProps) => {
 		filteredCards = filteredCards.filter(card => card.archived === false);
 	}
 
-	if (categoryFilter !== "all" && categoryFilter !== "") {
+	if (categoryFilter !== "All" && categoryFilter !== "") {
 		filteredCards = filteredCards.filter(
 			card => card.category.name === categoryFilter
 		);
@@ -58,7 +59,10 @@ const StatusList = ({ title, status }: StatusListProps) => {
 					className={styles.statusList__newCardButton}
 					onClick={() => setAddNewCardModal(true)}
 				>
-					Add New Card
+					<span>
+						<FaPlus />
+					</span>{" "}
+					<p>Add a card</p>
 				</button>
 
 				{showAddNewCardModal && (

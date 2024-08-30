@@ -28,6 +28,7 @@ public class CategoryService {
         ValidationErrors errors = new ValidationErrors();
 
         String trimmedName = categoryData.getName().trim().toLowerCase();
+        trimmedName = trimmedName.substring(0, 1).toUpperCase() + trimmedName.substring(1, trimmedName.length());
 
         if (repo.existsByName(trimmedName)) {
             errors.addError("name", "The category '" + trimmedName + "' already exists");

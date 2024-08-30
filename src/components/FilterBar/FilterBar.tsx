@@ -12,7 +12,7 @@ const FilterBar = () => {
 	const { setCategoryFilter, setShowArchived, showArchived } =
 		useCardFilterContext();
 
-	const allCategories = [{ name: "all" }, ...categories];
+	const allCategories = [{ name: "All" }, ...categories];
 
 	return (
 		<>

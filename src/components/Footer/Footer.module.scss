@@ -1,3 +1,5 @@
+@use "../../styles/variables" as v;
+
 .footer {
 	display: flex;
 	flex-direction: column;
@@ -6,6 +8,11 @@
 	margin: 2rem;
 
 	&__content {
+		color: v.$light-text-color;
 		text-align: center;
+
+		&__link {
+			color: v.$light-text-color;
+		}
 	}
 }

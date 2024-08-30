@@ -1,3 +1,5 @@
+@use "../../styles/variables" as v;
+
 .card {
 	display: grid;
 	grid-template-columns: 9fr 1fr;
@@ -17,15 +19,21 @@
 			gap: 0.5rem;
 
 			&__category {
+				font-size: 12px;
+				letter-spacing: 0.02em;
+				font-weight: 600;
 				padding: 0.1rem 0.5rem;
 				border-radius: 50px;
 				background-color: lightgrey;
 			}
 
 			&__archived {
+				font-size: 12px;
+				letter-spacing: 0.02em;
+				font-weight: 600;
 				padding: 0.1rem 0.5rem;
 				border-radius: 50px;
-				background-color: lightcoral;
+				background-color: lightgray;
 			}
 		}
 	}
@@ -38,13 +46,11 @@
 		cursor: pointer;
 
 		&__icon {
-			transition: 200ms;
-			border-radius: 50px;
-			padding: 0.3rem;
+			border-radius: 10px;
+			padding: 0.5rem;
 
 			&:hover {
-				background-color: lightgray;
-				transform: scale(1.2);
+				background-color: v.$hover-color;
 			}
 		}
 	}

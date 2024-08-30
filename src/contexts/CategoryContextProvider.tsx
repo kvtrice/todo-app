@@ -23,7 +23,9 @@ const CategoryContextProvider = ({
 	const [categories, setCategories] = useState<CategoryResponse[]>([]);
 
 	useEffect(() => {
-		getAllCategories().then(categories => setCategories(categories));
+		getAllCategories().then(categories => {
+			setCategories(categories);
+		});
 	}, []);
 
 	return (
