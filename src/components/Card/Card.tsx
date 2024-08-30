@@ -4,14 +4,17 @@ import Modal from "../Modal/Modal";
 import CardForm from "../CardForm/CardForm";
 import { toStatusEnum } from "../../utils/status-utils";
 import {
+	createCard,
 	deleteCardById,
 	getAllCards,
 	updateCardById,
 } from "../../services/card-services";
-import { CardFormData } from "../CardForm/schema";
+import { CardFormData, Status } from "../CardForm/schema";
 import styles from "./Card.module.scss";
-import { MdOutlineEdit } from "react-icons/md";
 import useCardContext from "../../hooks/useCardContext";
+import { HiOutlineDuplicate } from "react-icons/hi";
+import { TbEdit } from "react-icons/tb";
+import { STATUS_OPTIONS } from "../../constants/data";
 
 interface CardProps {
 	card: CardFetchResponse;
@@ -43,6 +46,27 @@ const Card = ({ card }: CardProps) => {
 		}
 	};
 
+	const handleDuplicate = async () => {
+		try {
+			const cardStatus = STATUS_OPTIONS.filter(
+				status => status.value === card.status
+			);
+
+			const cardToDuplicate = {
+				description: card.description + " (copy)",
+				categoryId: card.category.id,
+				isArchived: card.archived,
+				status: cardStatus[0].value,
+			};
+
+			await createCard(cardToDuplicate);
+			const updatedCards = await getAllCards();
+			setCards(updatedCards);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	return (
 		<>
 			<div className={styles.card}>
@@ -62,10 +86,15 @@ const Card = ({ card }: CardProps) => {
 						<p>{card.description}</p>
 					</div>
 				</div>
-				<div className={styles.card__editButton}>
-					<MdOutlineEdit
+				<div className={styles.card__actionButtons}>
+					<HiOutlineDuplicate
 						size={22}
-						className={styles.card__editButton__icon}
+						className={styles.card__actionButtons__duplicate}
+						onClick={handleDuplicate}
+					/>
+					<TbEdit
+						size={22}
+						className={styles.card__actionButtons__edit}
 						onClick={() => setShowEditCardModal(true)}
 					/>
 				</div>
