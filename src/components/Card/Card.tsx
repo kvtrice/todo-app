@@ -9,7 +9,7 @@ import {
 	getAllCards,
 	updateCardById,
 } from "../../services/card-services";
-import { CardFormData, Status } from "../CardForm/schema";
+import { CardFormData } from "../CardForm/schema";
 import styles from "./Card.module.scss";
 import useCardContext from "../../hooks/useCardContext";
 import { HiOutlineDuplicate } from "react-icons/hi";

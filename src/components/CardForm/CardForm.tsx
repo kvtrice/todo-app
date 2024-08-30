@@ -51,8 +51,7 @@ const CardForm = ({
 			>
 				<div className={styles.form__field}>
 					<label htmlFor="description">Task Description: </label>
-					<input
-						type="text"
+					<textarea
 						id="description"
 						{...register("description")}
 					/>
