@@ -3,6 +3,7 @@ import {
 	CategoryResponse,
 	createCategory,
 	deleteCategoryById,
+	getAllCategories,
 } from "../../services/category-services";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,8 +54,8 @@ const CategoryForm = ({ setModal }: CategoryFormProps) => {
 
 	const handleAddNewCategory = async (category: CategoryFormData) => {
 		try {
-			const createdCategory = await createCategory(category);
-			const newCategories = [createdCategory, ...categories];
+			await createCategory(category);
+			const newCategories = await getAllCategories();
 			setCategories(newCategories);
 		} catch (err) {
 			console.log(err);

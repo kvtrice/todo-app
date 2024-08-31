@@ -17,7 +17,6 @@ export const duplicateCard = (card: CardFetchResponse) => {
 
 export const getTagColour = (card: CardFetchResponse) => {
 	const { categories } = useCategoryContext();
-
 	const categoryIndex = categories.findIndex(
 		category => category.name === card.category.name
 	);
