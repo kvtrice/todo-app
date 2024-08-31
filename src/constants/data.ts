@@ -5,3 +5,5 @@ export const STATUS_OPTIONS = [
 	{ value: Status.INPROGRESS, label: "In Progress" },
 	{ value: Status.DONE, label: "Done" },
 ];
+
+export const TAG_COLOURS = ["blue", "pink", "yellow", "orange", "teal"];

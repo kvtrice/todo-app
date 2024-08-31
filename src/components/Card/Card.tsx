@@ -14,7 +14,7 @@ import styles from "./Card.module.scss";
 import useCardContext from "../../hooks/useCardContext";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { TbEdit } from "react-icons/tb";
-import { STATUS_OPTIONS } from "../../constants/data";
+import { duplicateCard, getTagColour } from "../../utils/card-utils";
 
 interface CardProps {
 	card: CardFetchResponse;
@@ -48,17 +48,7 @@ const Card = ({ card }: CardProps) => {
 
 	const handleDuplicate = async () => {
 		try {
-			const cardStatus = STATUS_OPTIONS.filter(
-				status => status.value === card.status
-			);
-
-			const cardToDuplicate = {
-				description: card.description + " (copy)",
-				categoryId: card.category.id,
-				isArchived: card.archived,
-				status: cardStatus[0].value,
-			};
-
+			const cardToDuplicate = duplicateCard(card);
 			await createCard(cardToDuplicate);
 			const updatedCards = await getAllCards();
 			setCards(updatedCards);
@@ -67,12 +57,17 @@ const Card = ({ card }: CardProps) => {
 		}
 	};
 
+	const tagColor = getTagColour(card);
+
 	return (
 		<>
 			<div className={styles.card}>
 				<div className={styles.card__main}>
 					<div className={styles.card__main__tags}>
-						<span className={styles.card__main__tags__category}>
+						<span
+							className={`${styles.card__main__tags__category} ${styles[tagColor]}
+							`}
+						>
 							{card.category.name}
 						</span>
 						{card.archived && (
