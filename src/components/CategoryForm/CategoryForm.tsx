@@ -63,7 +63,6 @@ const CategoryForm = ({ setModal }: CategoryFormProps) => {
 	return (
 		<div>
 			<div className={styles.category__list}>
-				<h2 className={styles.category__heading}>Categories</h2>
 				{categories &&
 					categories.map(category => (
 						<div

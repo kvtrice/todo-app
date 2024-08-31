@@ -19,10 +19,11 @@ const FilterBar = () => {
 			<div className={styles.filter}>
 				<div className={styles.filter__left}>
 					<div className={styles.filter__left__categories}>
-						<label htmlFor="categories">Categories: </label>
+						<label htmlFor="categories">Filter by category: </label>
 						<select
 							name="categories"
 							id="categories"
+							className={styles.filter__left__categories__select}
 							onChange={e => setCategoryFilter(e.target.value)}
 						>
 							{allCategories.map(category => (
@@ -36,24 +37,33 @@ const FilterBar = () => {
 						</select>
 					</div>
 					<div className={styles.filter__left__archived}>
-						<label htmlFor="showArchived">Show Archived</label>
+						<label htmlFor="showArchived">Show archived: </label>
 						<input
 							type="checkbox"
 							checked={showArchived}
 							id="showArchived"
+							className={
+								styles.filter__left__categories__checkbox
+							}
 							onChange={e => setShowArchived(e.target.checked)}
 						/>
 					</div>
 				</div>
 				<div className={styles.filter__manageCategories}>
-					<button onClick={() => setShowManageCategoriesModal(true)}>
+					<button
+						className={styles.filter__manageCategories__btn}
+						onClick={() => setShowManageCategoriesModal(true)}
+					>
 						⚙️ Manage Categories
 					</button>
 				</div>
 			</div>
 
 			{showManageCategoriesModal && (
-				<Modal handleModal={setShowManageCategoriesModal}>
+				<Modal
+					handleModal={setShowManageCategoriesModal}
+					title="Manage categories"
+				>
 					<CategoryForm setModal={setShowManageCategoriesModal} />
 				</Modal>
 			)}

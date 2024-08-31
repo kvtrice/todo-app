@@ -41,27 +41,38 @@ const CardForm = ({
 	isSubmitSuccessful && reset();
 
 	return (
-		<>
-			<div>
-				<h2>{formType === "CREATE" ? "Add New" : "Edit "} Card</h2>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className={styles.form}
+		>
+			<div className={styles.form__field}>
+				<label
+					className={styles.form__field__label}
+					htmlFor="description"
+				>
+					Description{" "}
+				</label>
+				<textarea
+					className={styles.form__field__textarea}
+					id="description"
+					rows={3}
+					placeholder="Start typing..."
+					{...register("description")}
+				/>
+				{errors?.description && (
+					<small>{errors.description.message}</small>
+				)}
 			</div>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className={styles.form}
-			>
-				<div className={styles.form__field}>
-					<label htmlFor="description">Task Description: </label>
-					<textarea
-						id="description"
-						{...register("description")}
-					/>
-					{errors?.description && (
-						<small>{errors.description.message}</small>
-					)}
-				</div>
-				<div className={styles.form__field}>
-					<label htmlFor="category">Category: </label>
+			<div className={styles.form__dropdowns}>
+				<div className={styles.form__dropdowns__field}>
+					<label
+						className={styles.form__dropdowns__field__label}
+						htmlFor="category"
+					>
+						Category{" "}
+					</label>
 					<select
+						className={styles.form__dropdowns__field__select}
 						id="category"
 						{...register("categoryId", { valueAsNumber: true })}
 					>
@@ -79,10 +90,16 @@ const CardForm = ({
 						<small>{errors.categoryId.message}</small>
 					)}
 				</div>
-				<div className={styles.form__field}>
-					<label htmlFor="status">Status: </label>
+				<div className={styles.form__dropdowns__field}>
+					<label
+						className={styles.form__dropdowns__field__label}
+						htmlFor="status"
+					>
+						Status{" "}
+					</label>
 					<select
 						id="status"
+						className={styles.form__dropdowns__field__select}
 						{...register("status")}
 					>
 						{STATUS_OPTIONS.map(status => (
@@ -96,21 +113,36 @@ const CardForm = ({
 					</select>
 					{errors?.status && <small>{errors.status.message}</small>}
 				</div>
+			</div>
 
-				{formType === "EDIT" && onArchive && (
+			<div className={styles.form__btns}>
+				<div className={styles.form__btns__left}>
+					{formType === "EDIT" && onArchive && (
+						<button
+							className={styles.form__btns__left__archive}
+							type="button"
+							onClick={() => onArchive()}
+						>
+							Archive
+						</button>
+					)}
+				</div>
+				<div className={styles.form__btns__right}>
 					<button
-						type="button"
-						onClick={() => onArchive()}
+						className={styles.form__btns__right__cancel}
+						onClick={() => setModal(false)}
 					>
-						Archive Card
+						Cancel
 					</button>
-				)}
-				<button onClick={() => setModal(false)}>Cancel</button>
-				<button type="submit">
-					{formType === "CREATE" ? "Create" : "Update"} Card
-				</button>
-			</form>
-		</>
+					<button
+						type="submit"
+						className={styles.form__btns__right__submit}
+					>
+						Save
+					</button>
+				</div>
+			</div>
+		</form>
 	);
 };
 

@@ -1,0 +1,23 @@
+@use "./variables" as v;
+
+@mixin default-btn(
+	$background-color: v.$light-text-color,
+	$hover-bg-color: v.$hover-color
+) {
+	border: none;
+	background-color: $background-color;
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $hover-bg-color;
+	}
+}
+
+@mixin dropdown-menu {
+	cursor: pointer;
+	border: #8b8b8b 1px solid;
+	border-radius: 5px;
+	padding: 0.2rem;
+}

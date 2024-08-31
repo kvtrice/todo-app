@@ -1,4 +1,5 @@
 @use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
 
 .filter {
 	background-color: #00000046;
@@ -16,5 +17,24 @@
 		flex-direction: row;
 		gap: 2rem;
 		align-items: center;
+
+		&__categories {
+			&__select {
+				@include m.dropdown-menu;
+			}
+
+			&__checkbox {
+				transform: scale(1.5);
+			}
+		}
+	}
+
+	&__manageCategories {
+		&__btn {
+			@include m.default-btn(
+				$background-color: #dedede,
+				$hover-bg-color: v.$light-text-color
+			);
+		}
 	}
 }

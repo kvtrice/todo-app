@@ -99,7 +99,10 @@ const Card = ({ card }: CardProps) => {
 					/>
 				</div>
 				{showEditCardModal && (
-					<Modal handleModal={setShowEditCardModal}>
+					<Modal
+						handleModal={setShowEditCardModal}
+						title="Edit card"
+					>
 						<CardForm
 							formType="EDIT"
 							defaultValues={{
