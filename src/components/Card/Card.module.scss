@@ -1,10 +1,11 @@
 @use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
 
 .card {
 	display: grid;
 	grid-template-columns: 9fr 1fr;
 	padding: 0.5rem 0.8rem;
-	border-radius: 10px;
+	border-radius: v.$border-radius-lg;
 	box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.351);
 
 	&__main {
@@ -19,20 +20,12 @@
 			gap: 0.5rem;
 
 			&__category {
-				font-size: 12px;
-				letter-spacing: 0.02em;
-				font-weight: 600;
-				padding: 0.1rem 0.5rem;
-				border-radius: 50px;
+				@include m.tag-styles;
 				background-color: lightgrey;
 			}
 
 			&__archived {
-				font-size: 12px;
-				letter-spacing: 0.02em;
-				font-weight: 600;
-				padding: 0.1rem 0.5rem;
-				border-radius: 50px;
+				@include m.tag-styles;
 				background-color: lightgray;
 			}
 		}
@@ -46,14 +39,8 @@
 
 		&__edit,
 		&__duplicate {
-			border-radius: 10px;
-			padding: 0.4rem;
+			@include m.icon-styles;
 			color: v.$dark-text-color;
-			cursor: pointer;
-
-			&:hover {
-				background-color: v.$hover-color;
-			}
 		}
 	}
 }

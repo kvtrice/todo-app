@@ -4,7 +4,7 @@
 	width: calc((1200px - 4rem) / 3);
 	height: fit-content;
 	padding: 1rem;
-	border-radius: 10px;
+	border-radius: v.$border-radius-lg;
 	background-color: white;
 
 	&__heading {
@@ -22,7 +22,7 @@
 		border: none;
 		cursor: pointer;
 		text-align: left;
-		border-radius: 10px;
+		border-radius: v.$border-radius-lg;
 		padding: 0.5rem;
 		color: v.$dark-text-color;
 		font-weight: 600;

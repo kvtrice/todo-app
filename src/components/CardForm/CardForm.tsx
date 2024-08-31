@@ -60,7 +60,9 @@ const CardForm = ({
 					{...register("description")}
 				/>
 				{errors?.description && (
-					<small>{errors.description.message}</small>
+					<small className={styles.error}>
+						{errors.description.message}
+					</small>
 				)}
 			</div>
 			<div className={styles.form__dropdowns}>
@@ -87,7 +89,9 @@ const CardForm = ({
 							))}
 					</select>
 					{errors?.categoryId && (
-						<small>{errors.categoryId.message}</small>
+						<small className={styles.error}>
+							{errors.categoryId.message}
+						</small>
 					)}
 				</div>
 				<div className={styles.form__dropdowns__field}>
@@ -111,7 +115,11 @@ const CardForm = ({
 							</option>
 						))}
 					</select>
-					{errors?.status && <small>{errors.status.message}</small>}
+					{errors?.status && (
+						<small className={styles.error}>
+							{errors.status.message}
+						</small>
+					)}
 				</div>
 			</div>
 

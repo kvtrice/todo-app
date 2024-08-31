@@ -1,12 +1,9 @@
 @use "./variables" as v;
 
-@mixin default-btn(
-	$background-color: v.$light-text-color,
-	$hover-bg-color: v.$hover-color
-) {
+@mixin default-btn($background-color: #ececec, $hover-bg-color: #d8d7d7) {
 	border: none;
 	background-color: $background-color;
-	border-radius: 5px;
+	border-radius: v.$border-radius-sm;
 	padding: 0.5rem 1rem;
 	cursor: pointer;
 
@@ -18,6 +15,34 @@
 @mixin dropdown-menu {
 	cursor: pointer;
 	border: #8b8b8b 1px solid;
-	border-radius: 5px;
+	border-radius: v.$border-radius-sm;
 	padding: 0.2rem;
+}
+
+@mixin icon-styles {
+	border-radius: v.$border-radius-lg;
+	cursor: pointer;
+	padding: 0.4rem;
+
+	&:hover {
+		background-color: v.$hover-color;
+	}
+}
+
+@mixin tag-styles {
+	font-size: 12px;
+	letter-spacing: 0.02em;
+	font-weight: 600;
+	padding: 0.1rem 0.5rem;
+	border-radius: 50px;
+}
+
+@mixin text-field-style {
+	border: #8b8b8b 1px solid;
+	border-radius: v.$border-radius-sm;
+	padding: 0.5rem;
+
+	&::placeholder {
+		color: #bdbcbc;
+	}
 }
