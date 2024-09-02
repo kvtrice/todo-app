@@ -127,6 +127,7 @@ const CategoryForm = ({ setModal }: CategoryFormProps) => {
 					</small>
 				)}
 			</form>
+
 			<div className={styles.categories__btn}>
 				<button
 					className={styles.categories__btn__done}

@@ -2,6 +2,7 @@
 @use "../../styles/mixins" as m;
 
 .form {
+	margin-top: 1rem;
 	width: 500px;
 	display: flex;
 	flex-direction: column;
@@ -43,41 +44,6 @@
 
 			&__select {
 				@include m.dropdown-menu;
-			}
-		}
-	}
-
-	&__btns {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-
-		&__left {
-			&__archive {
-				@include m.default-btn(
-					$background-color: v.$danger-btn-bg,
-					$hover-bg-color: v.$danger-btn-bg-hover
-				);
-				color: v.$danger-text-color;
-			}
-		}
-
-		&__right {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-end;
-			align-items: self-end;
-			gap: 1rem;
-
-			&__cancel {
-				@include m.default-btn;
-			}
-
-			&__submit {
-				@include m.default-btn(
-					$background-color: v.$submit-btn-bg,
-					$hover-bg-color: v.$submit-btn-bg-hover
-				);
-				color: v.$submit-text-color;
 			}
 		}
 	}

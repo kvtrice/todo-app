@@ -6,7 +6,7 @@
 	grid-template-columns: 9fr 1fr;
 	padding: 0.5rem 0.8rem;
 	border-radius: v.$border-radius-lg;
-	box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.351);
+	box-shadow: v.$default-box-shadow;
 
 	&__main {
 		display: flex;
@@ -57,7 +57,7 @@
 
 .yellow {
 	background-color: rgb(235, 216, 52);
-	color: v.$dark-text-color;
+	color: black;
 }
 
 .orange {

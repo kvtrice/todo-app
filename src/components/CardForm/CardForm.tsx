@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { STATUS_OPTIONS } from "../../constants/data";
 import useCategoryContext from "../../hooks/useCategoryContext";
 
+import ModalButtons from "../ModalButtons/ModalButtons";
+
 interface CardFormProps {
 	onSubmit: (data: CardFormData) => unknown;
 	defaultValues?: Partial<CardFormData>;
@@ -13,7 +15,7 @@ interface CardFormProps {
 	setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-type FormType = "CREATE" | "EDIT";
+export type FormType = "CREATE" | "EDIT";
 
 const CardForm = ({
 	onSubmit,
@@ -123,33 +125,11 @@ const CardForm = ({
 				</div>
 			</div>
 
-			<div className={styles.form__btns}>
-				<div className={styles.form__btns__left}>
-					{formType === "EDIT" && onArchive && (
-						<button
-							className={styles.form__btns__left__archive}
-							type="button"
-							onClick={() => onArchive()}
-						>
-							Archive
-						</button>
-					)}
-				</div>
-				<div className={styles.form__btns__right}>
-					<button
-						className={styles.form__btns__right__cancel}
-						onClick={() => setModal(false)}
-					>
-						Cancel
-					</button>
-					<button
-						type="submit"
-						className={styles.form__btns__right__submit}
-					>
-						Save
-					</button>
-				</div>
-			</div>
+			<ModalButtons
+				onArchive={onArchive}
+				formType={formType}
+				setModal={setModal}
+			/>
 		</form>
 	);
 };

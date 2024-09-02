@@ -1,10 +1,11 @@
 @use "./variables" as v;
 
 @mixin default-btn($background-color: #ececec, $hover-bg-color: #d8d7d7) {
-	border: none;
+	border: transparent;
 	background-color: $background-color;
 	border-radius: v.$border-radius-sm;
 	padding: 0.5rem 1rem;
+	box-shadow: v.$default-box-shadow;
 	cursor: pointer;
 
 	&:hover {

@@ -1,10 +1,10 @@
 @use "../../styles/mixins" as m;
 @use "../../styles/variables" as v;
 .categories {
-	margin-bottom: 1rem;
+	margin: 1rem 0;
 
 	&__wrapper {
-		width: 300px;
+		width: 450px;
 	}
 
 	&__list {
@@ -50,6 +50,7 @@
 			width: 100%;
 
 			&__wrapper {
+				margin-top: 1rem;
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
