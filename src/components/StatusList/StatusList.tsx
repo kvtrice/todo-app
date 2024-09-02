@@ -8,6 +8,7 @@ import Card from "../Card/Card";
 import useCardContext from "../../hooks/useCardContext";
 import useCardFilterContext from "../../hooks/useCardFilterContext";
 import { FaPlus } from "react-icons/fa6";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 interface StatusListProps {
 	title: string;
@@ -16,6 +17,7 @@ interface StatusListProps {
 
 const StatusList = ({ title, status }: StatusListProps) => {
 	const [showAddNewCardModal, setAddNewCardModal] = useState<boolean>(false);
+	const [error, setError] = useState<string>("");
 	const { cards, setCards } = useCardContext();
 	const { categoryFilter, showArchived } = useCardFilterContext();
 
@@ -32,13 +34,16 @@ const StatusList = ({ title, status }: StatusListProps) => {
 	}
 
 	const onSubmit = async (data: CardFormData) => {
+		setError("");
 		try {
 			await createCard(data);
 			const updatedCards = await getAllCards();
 			setCards(updatedCards);
 			setAddNewCardModal(false);
 		} catch (err) {
-			console.log(err);
+			if (err instanceof Error) {
+				setError(err.message);
+			}
 		}
 	};
 
@@ -55,6 +60,7 @@ const StatusList = ({ title, status }: StatusListProps) => {
 							/>
 						))}
 				</div>
+				{error && <ErrorMessage error={error} />}
 				<button
 					className={styles.statusList__newCardButton}
 					onClick={() => setAddNewCardModal(true)}

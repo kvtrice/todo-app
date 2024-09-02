@@ -6,6 +6,7 @@ import { STATUS_OPTIONS } from "../../constants/data";
 import useCategoryContext from "../../hooks/useCategoryContext";
 
 import ModalButtons from "../ModalButtons/ModalButtons";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 interface CardFormProps {
 	onSubmit: (data: CardFormData) => unknown;
@@ -62,9 +63,7 @@ const CardForm = ({
 					{...register("description")}
 				/>
 				{errors?.description && (
-					<small className={styles.error}>
-						{errors.description.message}
-					</small>
+					<ErrorMessage error={errors.description.message} />
 				)}
 			</div>
 			<div className={styles.form__dropdowns}>
@@ -91,9 +90,7 @@ const CardForm = ({
 							))}
 					</select>
 					{errors?.categoryId && (
-						<small className={styles.error}>
-							{errors.categoryId.message}
-						</small>
+						<ErrorMessage error={errors.categoryId.message} />
 					)}
 				</div>
 				<div className={styles.form__dropdowns__field}>
@@ -118,9 +115,7 @@ const CardForm = ({
 						))}
 					</select>
 					{errors?.status && (
-						<small className={styles.error}>
-							{errors.status.message}
-						</small>
+						<ErrorMessage error={errors.status.message} />
 					)}
 				</div>
 			</div>

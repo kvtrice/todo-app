@@ -1,0 +1,6 @@
+@use "../../styles/variables" as v;
+
+.error {
+	padding: 0.5rem 0;
+	color: v.$danger-text-color;
+}
