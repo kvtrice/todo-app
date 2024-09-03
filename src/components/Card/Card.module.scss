@@ -4,6 +4,7 @@
 .card {
 	display: grid;
 	grid-template-columns: 9fr 1fr;
+	margin: 0.5rem;
 	padding: 0.5rem 0.8rem;
 	border-radius: v.$border-radius-lg;
 	box-shadow: v.$default-box-shadow;

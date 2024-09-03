@@ -6,9 +6,9 @@
 	justify-content: center;
 	align-items: center;
 	margin: 2rem;
+	height: v.$header-height;
 
 	&__content {
-		text-align: center;
-		color: v.$light-text-color;
+		height: 100%;
 	}
 }

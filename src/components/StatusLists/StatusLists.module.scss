@@ -1,7 +1,12 @@
 .statusLists {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: 1rem;
 	padding: 1rem;
+	overflow-x: scroll;
+
+	&::-webkit-scrollbar {
+		background: transparent;
+	}
 }

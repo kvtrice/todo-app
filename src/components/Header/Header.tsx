@@ -3,7 +3,11 @@ import styles from "./Header.module.scss";
 const Header = () => {
 	return (
 		<div className={styles.header}>
-			<h1 className={styles.header__content}>Organise your life 📝</h1>
+			<img
+				className={styles.header__content}
+				src="/todo-hero.png"
+				alt="Organise your life"
+			/>
 		</div>
 	);
 };

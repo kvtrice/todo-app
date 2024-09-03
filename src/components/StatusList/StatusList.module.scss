@@ -2,10 +2,14 @@
 
 .statusList {
 	width: calc((1200px - 4rem) / 3);
+	min-width: 300px;
 	height: fit-content;
+	max-height: calc(100vh - v.$footer-height - v.$header-height - 18rem);
 	padding: 1rem;
 	border-radius: v.$border-radius-lg;
 	background-color: white;
+	display: flex;
+	flex-direction: column;
 
 	&__heading {
 		margin-bottom: 1rem;
@@ -38,5 +42,6 @@
 .cardContainer {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	overflow-y: auto;
+	flex-grow: 1;
 }
