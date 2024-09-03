@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Modal from "../Modal/Modal";
-import CategoryForm from "../CategoryForm/CategoryForm";
 import styles from "./FilterBar.module.scss";
 import useCategoryContext from "../../hooks/useCategoryContext";
 import useCardFilterContext from "../../hooks/useCardFilterContext";
+import ManageCategories from "../ManageCategories/ManageCategories";
 
 const FilterBar = () => {
 	const [showManageCategoriesModal, setShowManageCategoriesModal] =
@@ -64,7 +64,7 @@ const FilterBar = () => {
 					handleModal={setShowManageCategoriesModal}
 					title="Manage categories"
 				>
-					<CategoryForm setModal={setShowManageCategoriesModal} />
+					<ManageCategories setModal={setShowManageCategoriesModal} />
 				</Modal>
 			)}
 		</>

@@ -20,7 +20,11 @@ export const createCategory = async (categoryData: CategoryFormData) => {
 	});
 
 	if (!response.ok) {
-		throw new Error("Unable to create category");
+		const errorResponse = await response.json();
+		if (errorResponse.errors) {
+			const errorMessage = errorResponse.errors.name;
+			throw new Error(`Could not create category: ${errorMessage}`);
+		}
 	}
 
 	const category = await response.json();

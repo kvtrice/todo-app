@@ -6,15 +6,15 @@ import Layout from "./components/Layout/Layout";
 
 function App() {
 	return (
-		<CategoryContextProvider>
-			<CardContextProvider>
+		<CardContextProvider>
+			<CategoryContextProvider>
 				<CardFilterContextProvider>
 					<Layout>
 						<ToDoMain />
 					</Layout>
 				</CardFilterContextProvider>
-			</CardContextProvider>
-		</CategoryContextProvider>
+			</CategoryContextProvider>
+		</CardContextProvider>
 	);
 }
 

@@ -5,9 +5,15 @@ interface ModalButtonsProps {
 	onArchive?: () => unknown;
 	formType?: FormType;
 	setModal: React.Dispatch<React.SetStateAction<boolean>>;
+	archiveStatus: boolean;
 }
 
-const ModalButtons = ({ onArchive, formType, setModal }: ModalButtonsProps) => {
+const ModalButtons = ({
+	onArchive,
+	formType,
+	setModal,
+	archiveStatus,
+}: ModalButtonsProps) => {
 	return (
 		<div className={styles.buttons}>
 			<div className={styles.buttons__left}>
@@ -17,14 +23,17 @@ const ModalButtons = ({ onArchive, formType, setModal }: ModalButtonsProps) => {
 						type="button"
 						onClick={() => onArchive()}
 					>
-						Archive
+						{archiveStatus === true ? "Restore" : "Archive"}
 					</button>
 				)}
 			</div>
 			<div className={styles.buttons__right}>
 				<button
 					className={styles.buttons__right__cancel}
-					onClick={() => setModal(false)}
+					onClick={e => {
+						e.preventDefault();
+						setModal(false);
+					}}
 				>
 					Cancel
 				</button>

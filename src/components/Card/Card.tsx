@@ -4,8 +4,8 @@ import Modal from "../Modal/Modal";
 import CardForm from "../CardForm/CardForm";
 import { toStatusEnum } from "../../utils/status-utils";
 import {
+	archiveCardById,
 	createCard,
-	deleteCardById,
 	getAllCards,
 	updateCardById,
 } from "../../services/card-services";
@@ -37,7 +37,7 @@ const Card = ({ card }: CardProps) => {
 
 	const onArchive = async () => {
 		try {
-			await deleteCardById(card.id);
+			await archiveCardById(card.id);
 			const updatedCards = await getAllCards();
 			setCards(updatedCards);
 			setShowEditCardModal(false);
@@ -109,6 +109,7 @@ const Card = ({ card }: CardProps) => {
 							setModal={setShowEditCardModal}
 							onSubmit={onSubmit}
 							onArchive={onArchive}
+							archiveStatus={card.archived}
 						/>
 					</Modal>
 				)}

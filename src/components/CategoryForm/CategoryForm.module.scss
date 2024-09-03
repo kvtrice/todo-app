@@ -1,100 +1,35 @@
 @use "../../styles/mixins" as m;
 @use "../../styles/variables" as v;
 
-.categories {
-	margin: 1rem 0;
+.form {
+	display: grid;
+	grid-template-columns: 8fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	column-gap: 1rem;
 
-	&__wrapper {
-		width: 450px;
-	}
+	&__field {
+		width: 100%;
 
-	&__list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.3rem;
-
-		&__item {
-			display: grid;
-			grid-template-columns: 8fr 1fr;
+		&__wrapper {
+			margin-top: 1rem;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
 			gap: 1rem;
+		}
 
-			&__wrapper {
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-				border: 1px solid #d3d3d3;
-				border-radius: 5px;
-				padding: 0.3rem 0.5rem;
-				background-color: #e7e7e7;
-			}
-
-			&__num {
-				font-size: smaller;
-				color: gray;
-				font-style: italic;
-			}
-
-			&__delete {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-
-				&__icon {
-					@include m.icon-styles;
-					padding: 0.4rem;
-					color: v.$danger-text-color;
-				}
-			}
+		&__text {
+			width: 90%;
+			@include m.text-field-style;
 		}
 	}
 
-	&__form {
-		display: grid;
-		grid-template-columns: 8fr 1fr;
-		grid-template-rows: 1fr 1fr;
-		column-gap: 1rem;
-
-		&__field {
-			width: 100%;
-
-			&__wrapper {
-				margin-top: 1rem;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-				gap: 1rem;
-			}
-
-			&__text {
-				width: 90%;
-				@include m.text-field-style;
-			}
-		}
-
-		&__submit {
-			@include m.default-btn(
-				$background-color: v.$submit-btn-bg,
-				$hover-bg-color: v.$submit-btn-bg-hover
-			);
-			color: v.$submit-text-color;
-		}
+	&__submit {
+		@include m.default-btn(
+			$background-color: v.$submit-btn-bg,
+			$hover-bg-color: v.$submit-btn-bg-hover
+		);
+		color: v.$submit-text-color;
 	}
-
-	&__btn {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-
-		&__done {
-			@include m.default-btn;
-		}
-	}
-}
-
-.error {
-	color: v.$danger-text-color;
-	padding: 0.5rem 0 1rem 0;
 }

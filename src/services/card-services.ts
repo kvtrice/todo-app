@@ -73,7 +73,7 @@ export const updateCardById = async (cardData: CardFormData, id: number) => {
 	return card as CardResponse;
 };
 
-export const deleteCardById = async (id: number) => {
+export const archiveCardById = async (id: number) => {
 	const response = await fetch(`${baseUrl}/cards/${id}`, {
 		method: "DELETE",
 	});

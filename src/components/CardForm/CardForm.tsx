@@ -14,6 +14,7 @@ interface CardFormProps {
 	formType?: FormType;
 	onArchive?: () => unknown;
 	setModal: React.Dispatch<React.SetStateAction<boolean>>;
+	archiveStatus: boolean;
 }
 
 export type FormType = "CREATE" | "EDIT";
@@ -29,6 +30,7 @@ const CardForm = ({
 	formType = "CREATE",
 	onArchive,
 	setModal,
+	archiveStatus,
 }: CardFormProps) => {
 	const {
 		register,
@@ -124,6 +126,7 @@ const CardForm = ({
 				onArchive={onArchive}
 				formType={formType}
 				setModal={setModal}
+				archiveStatus={archiveStatus}
 			/>
 		</form>
 	);

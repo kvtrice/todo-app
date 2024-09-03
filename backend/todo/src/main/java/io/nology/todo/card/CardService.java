@@ -102,7 +102,7 @@ public class CardService {
         }
 
         Card foundCard = card.get();
-        foundCard.setArchived(true);
+        foundCard.setArchived(!foundCard.isArchived());
 
         foundCard.onUpdate();
 

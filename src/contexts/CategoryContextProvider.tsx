@@ -3,6 +3,7 @@ import {
 	CategoryResponse,
 	getAllCategories,
 } from "../services/category-services";
+import useCardContext from "../hooks/useCardContext";
 
 export const CategoryContext = createContext<CategoryContextType | undefined>(
 	undefined
@@ -21,12 +22,13 @@ const CategoryContextProvider = ({
 	children,
 }: CategoryContextProviderProps) => {
 	const [categories, setCategories] = useState<CategoryResponse[]>([]);
+	const { cards } = useCardContext();
 
 	useEffect(() => {
 		getAllCategories().then(categories => {
 			setCategories(categories);
 		});
-	}, []);
+	}, [cards]);
 
 	return (
 		<CategoryContext.Provider value={{ categories, setCategories }}>
