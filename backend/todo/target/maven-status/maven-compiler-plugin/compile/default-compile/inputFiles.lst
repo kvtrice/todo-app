@@ -17,4 +17,5 @@
 /Users/kat/Documents/Nology/projects/to-dos/backend/todo/src/main/java/io/nology/todo/common/exceptions/BadRequestException.java
 /Users/kat/Documents/Nology/projects/to-dos/backend/todo/src/main/java/io/nology/todo/common/exceptions/NotFoundException.java
 /Users/kat/Documents/Nology/projects/to-dos/backend/todo/src/main/java/io/nology/todo/common/exceptions/ServiceValidationException.java
+/Users/kat/Documents/Nology/projects/to-dos/backend/todo/src/main/java/io/nology/todo/config/AppConfig.java
 /Users/kat/Documents/Nology/projects/to-dos/backend/todo/src/main/java/io/nology/todo/config/WebConfig.java
