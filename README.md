@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+![](/docs/to-do-hero.jpg)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Full Stack To Do App
 
-Currently, two official plugins are available:
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/kats-todo-app?name=Vercel+Deployment)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+-   [View the live site](https://kats-todo-app.vercel.app/)
+-   [Overview](#overview)
+-   [Key Features](#key-features)
+-   [Tech Stack](#tech-stack)
+-   [Next Steps](#next-steps)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Overview
 
-- Configure the top-level `parserOptions` property like this:
+This project is a fullstack to-do list application that helps you with tawsk management. It provides a user-friendly interface to add, edit, and archive tasks (soft delete), as well update the tasks status ('To do', 'In Progress', 'Done').
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Key Features
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Add and edit tasks
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+New tasks can be easily added from any swimlane by clicking the 'Add new card button'. Existing cards can be edited by clicking the pen icon on the relevant card.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Fast Duplication of Tasks
+
+By clicking the duplicate button on a card, this will quickly duplicate all fields of the card followed by `(copy)`. The card will have the same category, status and description as the original card.
+
+### Archive and Restore tasks
+
+When editing a card, the card is able to be archived, this will hide it from view unless the suer specifically shooses to display archived cards. Any cards that have been archived are also able to be restored through editing an archived card.
+
+### Add and remove categories
+
+Categories are able to be added and removed through the 'Manage Categories' button. Categories that are already associated with a card are unable to be deleted so as to prevent a situation where there are cards that have no category.
+
+### Task Filtering
+
+Tasks are able to be filtered by category through the filter bar drop down, or by archived status through the 'SHow archived' checkbox. These filters can also be used in conjunction with one another, so you can filter by both parameters simultaneously (Eg: Show all cards inclsuing Archived where the Category = Coding)
+
+## Tech Stack
+
+-   **Frontend:** React (Vite), SCSS with BEM
+-   **Backend:** Java Spring Boot, PostgreSQL
+
+## Next Steps
+
+1. Toast Notifications
+
+    - When changes are made to a card display a toast notification to the user for better feedback if changes were successful or not
+
+2. Drag and Drop functionality
+
+    - Drag and drop is a common design pattern for task-based applications and something users are used to being able to do. This could be implemented using something like the [pangea dnd library](https://github.com/hello-pangea/dnd)
+
+3. Custom Sort Orders
+    - Currently tasks are displayed in order of creation (based on their id number), but it would provide better a better user experience if user were able to sort their cards in a custom way, so they can have a meaningful order within each swimlane.
