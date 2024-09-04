@@ -19,6 +19,7 @@ interface ManageCategoryProps {
 const ManageCategories = ({ setModal }: ManageCategoryProps) => {
 	const { categories, setCategories } = useCategoryContext();
 	const [error, setError] = useState<string>("");
+	const [isAddLoading, setIsAddLoading] = useState(false);
 
 	const handleDeleteCategory = async (category: CategoryResponse) => {
 		setError("");
@@ -52,9 +53,11 @@ const ManageCategories = ({ setModal }: ManageCategoryProps) => {
 	const handleAddNewCategory = async (category: CategoryFormData) => {
 		setError("");
 		try {
+			setIsAddLoading(true);
 			await createCategory(category);
 			const newCategories = await getAllCategories();
 			setCategories(newCategories);
+			setIsAddLoading(false);
 		} catch (err) {
 			if (err instanceof Error) {
 				setError(err.message);
@@ -117,7 +120,10 @@ const ManageCategories = ({ setModal }: ManageCategoryProps) => {
 				)}
 			</div>
 
-			<CategoryForm onSubmit={handleAddNewCategory} />
+			<CategoryForm
+				onSubmit={handleAddNewCategory}
+				isLoading={isAddLoading}
+			/>
 
 			<div className={styles.categories__btn}>
 				<button

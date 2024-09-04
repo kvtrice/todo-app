@@ -1,5 +1,7 @@
+import useButtonLoadingStateContext from "../../hooks/useButtonLoadingStateContext";
 import { FormType } from "../CardForm/CardForm";
 import styles from "./ModalButtons.module.scss";
+import { TailSpin } from "react-loading-icons";
 
 interface ModalButtonsProps {
 	onArchive?: () => unknown;
@@ -14,6 +16,8 @@ const ModalButtons = ({
 	setModal,
 	archiveStatus,
 }: ModalButtonsProps) => {
+	const { isArchiveLoading, isSaveLoading } = useButtonLoadingStateContext();
+
 	return (
 		<div className={styles.buttons}>
 			<div className={styles.buttons__left}>
@@ -21,9 +25,23 @@ const ModalButtons = ({
 					<button
 						className={styles.buttons__left__archive}
 						type="button"
-						onClick={() => onArchive()}
+						disabled={isArchiveLoading}
+						onClick={() => {
+							onArchive();
+						}}
 					>
-						{archiveStatus === true ? "Restore" : "Archive"}
+						{isArchiveLoading ? (
+							<TailSpin
+								height={10}
+								width={45}
+								stroke="#000000"
+								strokeWidth={8}
+							/>
+						) : archiveStatus === true ? (
+							"Restore"
+						) : (
+							"Archive"
+						)}
 					</button>
 				)}
 			</div>
@@ -40,8 +58,18 @@ const ModalButtons = ({
 				<button
 					type="submit"
 					className={styles.buttons__right__submit}
+					disabled={isSaveLoading}
 				>
-					Save
+					{isSaveLoading ? (
+						<TailSpin
+							height={10}
+							width={30}
+							stroke="#000000"
+							strokeWidth={8}
+						/>
+					) : (
+						"Save"
+					)}
 				</button>
 			</div>
 		</div>

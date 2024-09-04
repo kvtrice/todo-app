@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./CategoryForm.module.scss";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { TailSpin } from "react-loading-icons";
 
 interface CategoryFormProps {
 	onSubmit: (category: CategoryFormData) => Promise<void>;
+	isLoading: boolean;
 }
 
-const CategoryForm = ({ onSubmit }: CategoryFormProps) => {
+const CategoryForm = ({ onSubmit, isLoading }: CategoryFormProps) => {
 	const {
 		register,
 		reset,
@@ -38,8 +40,18 @@ const CategoryForm = ({ onSubmit }: CategoryFormProps) => {
 				<button
 					type="submit"
 					className={styles.form__submit}
+					disabled={isLoading}
 				>
-					Add
+					{isLoading ? (
+						<TailSpin
+							height={10}
+							width={23}
+							stroke="#000000"
+							strokeWidth={8}
+						/>
+					) : (
+						"Add"
+					)}
 				</button>
 			</div>
 			<div></div>

@@ -15,6 +15,7 @@ import useCardContext from "../../hooks/useCardContext";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { TbEdit } from "react-icons/tb";
 import { duplicateCard, getTagColour } from "../../utils/card-utils";
+import useButtonLoadingStateContext from "../../hooks/useButtonLoadingStateContext";
 
 interface CardProps {
 	card: CardFetchResponse;
@@ -23,12 +24,16 @@ interface CardProps {
 const Card = ({ card }: CardProps) => {
 	const [showEditCardModal, setShowEditCardModal] = useState(false);
 	const { setCards } = useCardContext();
+	const { setIsArchiveLoading, setIsSaveLoading } =
+		useButtonLoadingStateContext();
 
 	const onSubmit = async (data: CardFormData) => {
 		try {
+			setIsSaveLoading(true);
 			await updateCardById(data, card.id);
 			const updatedCards = await getAllCards();
 			setCards(updatedCards);
+			setIsSaveLoading(false);
 			setShowEditCardModal(false);
 		} catch (err) {
 			console.log(err);
@@ -37,9 +42,11 @@ const Card = ({ card }: CardProps) => {
 
 	const onArchive = async () => {
 		try {
+			setIsArchiveLoading(true);
 			await archiveCardById(card.id);
 			const updatedCards = await getAllCards();
 			setCards(updatedCards);
+			setIsArchiveLoading(false);
 			setShowEditCardModal(false);
 		} catch (err) {
 			console.log(err);

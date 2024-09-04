@@ -13,6 +13,10 @@
 				$hover-bg-color: v.$danger-btn-bg-hover
 			);
 			color: v.$danger-text-color;
+
+			&:disabled {
+				background-color: v.$hover-color;
+			}
 		}
 	}
 
@@ -33,6 +37,10 @@
 				$hover-bg-color: v.$submit-btn-bg-hover
 			);
 			color: v.$submit-text-color;
+
+			&:disabled {
+				background-color: v.$hover-color;
+			}
 		}
 	}
 }
