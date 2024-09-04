@@ -5,7 +5,7 @@ interface ModalButtonsProps {
 	onArchive?: () => unknown;
 	formType?: FormType;
 	setModal: React.Dispatch<React.SetStateAction<boolean>>;
-	archiveStatus: boolean;
+	archiveStatus?: boolean | undefined;
 }
 
 const ModalButtons = ({

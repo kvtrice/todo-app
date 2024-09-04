@@ -14,7 +14,7 @@ interface CardFormProps {
 	formType?: FormType;
 	onArchive?: () => unknown;
 	setModal: React.Dispatch<React.SetStateAction<boolean>>;
-	archiveStatus: boolean;
+	archiveStatus?: boolean | undefined;
 }
 
 export type FormType = "CREATE" | "EDIT";
