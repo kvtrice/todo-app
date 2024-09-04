@@ -2,6 +2,8 @@
 
 # Full Stack To Do App
 
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/kats-todo-app?name=Vercel+Deployment)
+
 ## Table of Contents
 
 -   [View the live site](https://kats-todo-app.vercel.app/)
