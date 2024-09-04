@@ -1,6 +1,5 @@
 io/nology/todo/category/CategoryRepository.class
 io/nology/todo/common/BaseEntity.class
-io/nology/todo/config/AppConfig.class
 io/nology/todo/common/ValidationErrors.class
 io/nology/todo/category/CategoryController.class
 io/nology/todo/common/exceptions/NotFoundException.class

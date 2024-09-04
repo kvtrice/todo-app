@@ -3,7 +3,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/<you_app_name>-0.0.1-SNAPSHOT.jar <your_app_name>.jar
+COPY --from=build /target/todo-0.0.1-SNAPSHOT.jar todo.jar
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-jar", "<your_app_name>.jar" ]
+ENTRYPOINT [ "java", "-jar", "todo.jar" ]
