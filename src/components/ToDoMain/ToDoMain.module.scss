@@ -1,3 +1,6 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
 .main {
 	max-width: 1200px;
 	margin: 0 auto;
@@ -6,6 +9,37 @@
 
 .loading {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	margin-top: 100px;
+	align-items: center;
+	color: v.$light-text-color;
+
+	&__spinner {
+		display: flex;
+		justify-content: center;
+		margin-top: 100px;
+	}
+
+	&__text {
+		margin-top: 2rem;
+		font-style: italic;
+		font-size: larger;
+	}
+
+	&__refresh {
+		margin-top: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&__text {
+			margin-bottom: 1rem;
+			font-style: italic;
+		}
+
+		&__btn {
+			@include m.default-btn;
+		}
+	}
 }

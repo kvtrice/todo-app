@@ -16,14 +16,36 @@ const ToDoMain = () => {
 		}
 	}, [cards]);
 
+	const refreshPage = () => {
+		window.location.reload();
+	};
+
 	return (
 		<>
 			{isLoading && (
 				<div className={styles.loading}>
-					<TailSpin
-						height={100}
-						width={100}
-					/>
+					<div className={styles.loading__spinner}>
+						<TailSpin
+							height={100}
+							width={100}
+						/>
+					</div>
+					<p className={styles.loading__text}>
+						The app may take a moment to load, thank you for your
+						patience.
+					</p>
+					<div className={styles.loading__refresh}>
+						<p className={styles.loading__refresh__text}>
+							Feels like it's taking a little too long? Try
+							refreshing here:{" "}
+						</p>
+						<button
+							className={styles.loading__refresh__btn}
+							onClick={refreshPage}
+						>
+							Refresh
+						</button>
+					</div>
 				</div>
 			)}
 			{!isLoading && (
