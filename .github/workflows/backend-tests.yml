@@ -27,4 +27,5 @@ jobs:
               run: mvn clean install
 
             - name: Run tests
+              working-directory: ./backend/todo
               run: mvn test
