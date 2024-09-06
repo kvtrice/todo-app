@@ -23,6 +23,7 @@ jobs:
                   java-version: 21
 
             - name: Build with Maven
+              working-directory: ./backend/todo
               run: mvn clean install
 
             - name: Run tests
