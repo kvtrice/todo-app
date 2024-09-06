@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: io.nology.todo.TodoApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.327 s -- in io.nology.todo.TodoApplicationTests

@@ -40,5 +40,4 @@ public class Category extends BaseEntity {
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
-
 }
