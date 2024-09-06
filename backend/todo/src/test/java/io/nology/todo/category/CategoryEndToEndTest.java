@@ -48,7 +48,7 @@ public class CategoryEndToEndTest {
                 .statusCode(HttpStatus.OK.value())
                 .body("$", hasSize(2))
                 .body("name", hasItems("Coding", "Pets"))
-                .body(matchesJsonSchemaInClasspath("io/nology/todo/category/schemas/categories-schema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/categories-schema.json"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class CategoryEndToEndTest {
                 .statusCode(HttpStatus.CREATED.value())
                 .body("name", equalTo("New category"))
                 .body("id", notNullValue())
-                .body(matchesJsonSchemaInClasspath("io/nology/todo/category/schemas/category-schema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/category-schema.json"));
     }
 
     @Test

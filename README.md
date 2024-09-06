@@ -1,7 +1,7 @@
 ![](/docs/to-do-hero.jpg)
 
 # Full Stack To Do App
-
+[![Backend Tests](https://github.com/kvtrice/todo-app/actions/workflows/backend-tests.yml/badge.svg)](https://github.com/kvtrice/todo-app/actions/workflows/backend-tests.yml)
 ![Vercel Deploy](https://deploy-badge.vercel.app/vercel/kats-todo-app?name=Vercel+Deployment)
 
 ## Table of Contents
