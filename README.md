@@ -16,7 +16,7 @@
 
 ## Overview
 
-This project is a fullstack to-do list application that helps you with tawsk management. It provides a user-friendly interface to add, edit, and archive tasks (soft delete), as well update the tasks status ('To do', 'In Progress', 'Done').
+This project is a fullstack to-do list application that helps you with task management. It provides a user-friendly interface to add, edit, and archive tasks (soft delete), as well update the tasks status ('To do', 'In Progress', 'Done').
 
 ## Installation Instructions
 
@@ -133,7 +133,7 @@ Tasks are able to be filtered by category through the filter bar drop down, or b
 
 ## Tech Stack
 
--   **Frontend:** React (Vite), SCSS with BEM
+-   **Frontend:** Typescript, React (Vite), SCSS with BEM
 -   **Backend:** Java Spring Boot, PostgreSQL
 
 ## Next Steps
